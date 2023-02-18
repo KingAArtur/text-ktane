@@ -23,8 +23,8 @@ if bomb:
     info_link = 'Look at this! ' + r'https://github.com/KingAArtur/text-ktane/blob/master/manual.md'
     info_strikes = f'{bomb.strikes} / {bomb.max_strikes} strikes'
     info_time = f'{bomb.get_remaining_time():.1f} seconds'
-    info_result = '[Solved!]' if bomb.state == BombState.SOLVED else (
-        '[Exploded!]' if bomb.state == BombState.EXPLODED else ''
+    info_result = '**[Solved!]**' if bomb.state == BombState.SOLVED else (
+        '**[Exploded!]**' if bomb.state == BombState.EXPLODED else ''
     )
 
     with st.sidebar:
@@ -36,7 +36,7 @@ if bomb:
     refresh_button = st.button(label='Refresh time')
 
     for i, module in enumerate(bomb.modules):
-        module_title = '[OK!]' if module.disarmed else ''
+        module_title = '**[OK!]**' if module.disarmed else ''
         with st.expander(label=module_title, expanded=True):
             module_text = module.show()
             guess = st.text_input(label=module_text, key=i).strip()

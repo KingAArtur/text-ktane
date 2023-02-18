@@ -21,7 +21,7 @@ class JustTypeItModule(BombModule):
         return module
 
     def show(self) -> str:
-        return 'I am pretty sure that you cannot repeat this: ' + self.answer
+        return 'I am pretty sure that you cannot repeat this: ' + f'**{self.answer}**'
 
     def guess(self, s: str) -> bool:
         if s == self.answer:

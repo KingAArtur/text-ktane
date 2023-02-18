@@ -25,7 +25,8 @@ def generate_equation(degree: int, root: int) -> str:
         equation[deg] += coefficient
 
     return ' + '.join(reversed([
-        f'{coefficient}' + (f'x^{deg}' if deg > 0 else '') for deg, coefficient in enumerate(equation)
+        f'{coefficient if coefficient != 1 else ""}' + (f'x^{deg}' if deg > 1 else ('x' if deg == 1 else ''))
+        for deg, coefficient in enumerate(equation)
     ])).replace('+ -', '- ') + ' = 0'
 
 
@@ -48,7 +49,7 @@ class EquationModule(BombModule):
         return module
 
     def show(self) -> str:
-        return f'This equation of {self.degree} degree is unsolvable. Good luck! ' + self.equation
+        return f'This equation of {self.degree} degree is unsolvable. Good luck!\n\n' + self.equation
 
     def guess(self, s: str) -> bool:
         if int(s) == self.answer:

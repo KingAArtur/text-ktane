@@ -23,7 +23,7 @@ class ChessModule(BombModule):
         return module
 
     def show(self) -> str:
-        return 'Why not play chess when you are to be exploded in a few minutes? ' + self.board
+        return 'Why not play **chess** when you are to be exploded in a few minutes?\n\n' + f'`{self.board}`'
 
     def guess(self, s: str) -> bool:
         if s == self.answer:

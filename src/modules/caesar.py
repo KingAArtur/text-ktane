@@ -28,7 +28,7 @@ class CaesarModule(BombModule):
         return module
 
     def show(self) -> str:
-        return 'Imagine using CAESAR CIPHER in bomb, ' + self.letters
+        return 'Imagine using **CAESAR CIPHER** in bomb, ' + f'**{self.letters}**'
 
     def guess(self, s: str) -> bool:
         if int(s) == self.answer:

@@ -1,7 +1,7 @@
 from time import time
 from typing import List
 
-from src.modules import BombModule, JustTypeItModule
+from src.modules import BombModule, JustTypeItModule, ChessModule
 
 
 class Bomb:
@@ -17,7 +17,7 @@ class Bomb:
 
         self.modules: List[BombModule] = [
             JustTypeItModule.create(),
-            JustTypeItModule.create()
+            ChessModule.create()
         ]
 
     def check_if_solved(self):

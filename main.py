@@ -38,3 +38,4 @@ if bomb:
                 'I am pretty sure you will lose with guesses like that'
             ]
         )
+        st.write(s)

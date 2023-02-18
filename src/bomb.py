@@ -26,7 +26,8 @@ class Bomb:
         self.max_time = max_time
 
         self.strikes = 0
-        self.time = time()
+        self.start_time = time()
+        self.remaining_time = max_time
 
         self.state = BombState.WORKING
 
@@ -40,6 +41,12 @@ class Bomb:
         ]
         shuffle(self.modules)
 
+    def get_remaining_time(self) -> float:
+        if self.state == BombState.WORKING:
+            self.remaining_time = max(self.max_time - (time() - self.start_time), 0.0)
+
+        return self.remaining_time
+
     def check_if_solved(self):
         for module in self.modules:
             if not module.disarmed:
@@ -48,10 +55,6 @@ class Bomb:
         if self.state == BombState.WORKING:
             self.state = BombState.SOLVED
 
-    def get_remaining_time(self) -> float:
-        current_time = time()
-        return max(self.max_time - (current_time - self.time), 0.0)
-
     def check_if_exploded(self):
         remaining_time = self.get_remaining_time()
         if self.strikes >= self.max_strikes or remaining_time == 0.0:
@@ -59,6 +62,10 @@ class Bomb:
                 self.state = BombState.EXPLODED
 
     def guess(self, module: BombModule, s: str):
+        self.check_if_exploded()
+        if self.state != BombState.WORKING:
+            return
+
         try:
             result = module.guess(s)
         except ValueError:
@@ -66,7 +73,6 @@ class Bomb:
 
         if not result:
             self.strike()
-        self.check_if_exploded()
         self.check_if_solved()
 
     def strike(self):

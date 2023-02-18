@@ -18,6 +18,8 @@ start_button = st.button(label='Restart!' if bomb else 'Start!', on_click=create
 
 
 if bomb:
+    bomb.check_if_exploded()
+
     info_link = 'Look at this! ' + r'https://github.com/KingAArtur/text-ktane/blob/master/manual.md'
     info_strikes = f'{bomb.strikes} / {bomb.max_strikes} strikes'
     info_time = f'{bomb.get_remaining_time():.1f} seconds'

@@ -16,6 +16,7 @@ if 'bomb' not in st.session_state:
 
 bomb: Optional[Bomb] = st.session_state.bomb
 if bomb:
+    st.write('Look at this! ' + r'https://github.com/KingAArtur/text-ktane/blob/master/manual.md')
     result = '[solved!]' if bomb.state == BombState.SOLVED else ('[exploded!]' if bomb.state == BombState.EXPLODED else '')
     st.write(f'{bomb.strikes} / {bomb.max_strikes} strikes, {bomb.get_remaining_time():.1f} seconds  {result}')
     refresh_button = st.button(label='Refresh time')

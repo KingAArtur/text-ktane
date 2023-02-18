@@ -2,7 +2,7 @@ import streamlit as st
 from typing import Optional
 from random import choice
 
-from src.bomb import Bomb
+from src.bomb import Bomb, BombState
 
 
 def create_bomb():
@@ -16,7 +16,9 @@ if 'bomb' not in st.session_state:
 
 bomb: Optional[Bomb] = st.session_state.bomb
 if bomb:
-    st.write(f'{bomb.strikes} / {bomb.max_strikes} strikes, {bomb.get_remaining_time()} seconds')
+    result = '[solved!]' if bomb.state == BombState.SOLVED else ('[exploded!]' if bomb.state == BombState.EXPLODED else '')
+    st.write(f'{bomb.strikes} / {bomb.max_strikes} strikes, {bomb.get_remaining_time():.1f} seconds  {result}')
+    refresh_button = st.button(label='refresh')
 
     for i, module in enumerate(bomb.modules):
         module_text = module.show()
@@ -24,9 +26,9 @@ if bomb:
         st.button(label='Guess!', key=-1 - i, on_click=bomb.guess, args=(module, guess))
         st.write('')
 
-    if bomb.exploded:
+    if bomb.state == BombState.EXPLODED:
         st.write('Congratulations! You successfully blew yourself up!')
-    elif bomb.solved:
+    elif bomb.state == BombState.SOLVED:
         st.write('Congratulations! Unfortunately, you successfully solved the bomb!')
         st.write('If you are DAVID:')
         st.write('    Happy birthday, DAVID!')

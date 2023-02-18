@@ -22,6 +22,7 @@ if bomb:
         module_text = module.show()
         guess = st.text_input(label=('[OK!] ' if module.disarmed else '') + module_text, key=i)
         st.button(label='Guess!', key=-1 - i, on_click=bomb.guess, args=(module, guess))
+        st.write('')
 
     if bomb.exploded:
         st.write('Congratulations! You successfully blew yourself up!')

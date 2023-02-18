@@ -1,7 +1,7 @@
 from time import time
 from typing import List
 
-from src.modules import BombModule, JustTypeItModule, ChessModule, CaesarModule, WordleModule
+from src.modules import BombModule, JustTypeItModule, ChessModule, CaesarModule, WordleModule, EquationModule
 
 
 class Bomb:
@@ -19,7 +19,8 @@ class Bomb:
             JustTypeItModule.create(),
             ChessModule.create(),
             CaesarModule.create(),
-            WordleModule.create()
+            WordleModule.create(),
+            EquationModule.create()
         ]
 
     def check_if_solved(self):
@@ -39,7 +40,11 @@ class Bomb:
             self.exploded = True
 
     def guess(self, module: BombModule, s: str):
-        result = module.guess(s)
+        try:
+            result = module.guess(s)
+        except ValueError:
+            result = False
+
         if not result:
             self.strike()
         self.check_if_solved()

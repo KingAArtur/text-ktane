@@ -18,11 +18,11 @@ bomb: Optional[Bomb] = st.session_state.bomb
 if bomb:
     result = '[solved!]' if bomb.state == BombState.SOLVED else ('[exploded!]' if bomb.state == BombState.EXPLODED else '')
     st.write(f'{bomb.strikes} / {bomb.max_strikes} strikes, {bomb.get_remaining_time():.1f} seconds  {result}')
-    refresh_button = st.button(label='refresh')
+    refresh_button = st.button(label='Refresh time')
 
     for i, module in enumerate(bomb.modules):
-        module_text = module.show()
-        guess = st.text_input(label=('[OK!] ' if module.disarmed else '') + module_text, key=i)
+        module_text = ('[OK!] ' if module.disarmed else '') + module.show()
+        guess = st.text_input(label=module_text, key=i).strip()
         st.button(label='Guess!', key=-1 - i, on_click=bomb.guess, args=(module, guess))
         st.write('')
 

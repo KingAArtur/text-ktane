@@ -1,8 +1,17 @@
 from time import time
 from typing import List
 from enum import Enum
+from random import shuffle
 
-from src.modules import BombModule, JustTypeItModule, ChessModule, CaesarModule, WordleModule, EquationModule
+from src.modules import (
+    BombModule,
+    JustTypeItModule,
+    ChessModule,
+    CaesarModule,
+    WordleModule,
+    EquationModule,
+    GuessNumberModule,
+)
 
 
 class BombState(Enum):
@@ -26,8 +35,10 @@ class Bomb:
             ChessModule.create(),
             CaesarModule.create(),
             WordleModule.create(),
-            EquationModule.create()
+            EquationModule.create(),
+            GuessNumberModule.create()
         ]
+        shuffle(self.modules)
 
     def check_if_solved(self):
         for module in self.modules:

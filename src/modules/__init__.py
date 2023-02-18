@@ -4,3 +4,4 @@ from .chess import ChessModule
 from .caesar import CaesarModule
 from .wordle import WordleModule
 from .equation import EquationModule
+from .guess_number import GuessNumberModule
